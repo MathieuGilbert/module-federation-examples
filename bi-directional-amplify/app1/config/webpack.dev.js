@@ -1,17 +1,17 @@
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require("webpack").container;
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const commonConfig = require('./webpack.common');
-
 const path = require("path");
+const commonConfig = require('./webpack.common');
 const deps = require("../package.json").dependencies;
 
 const devConfig = {
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
     port: 3001,
+  },
+  output: {
+    path: path.resolve(process.cwd(), 'dist'),
+    publicPath: "http://localhost:3001/",
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -40,10 +40,6 @@ const devConfig = {
         },
       ],
     }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-    new CleanWebpackPlugin(),
   ],
 };
 

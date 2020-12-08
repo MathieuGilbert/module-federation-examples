@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require("webpack").container;
+const path = require("path");
 const commonConfig = require('./webpack.common');
 const deps = require("../package.json").dependencies;
 
@@ -7,6 +8,8 @@ const prodConfig = {
   mode: "production",
   output: {
     filename: "[name].[contenthash].js",
+    path: path.resolve(process.cwd(), 'dist'),
+    publicPath: "https://d24jcvf7ms0hac.cloudfront.net/",
   },
   plugins: [
     new ModuleFederationPlugin({
