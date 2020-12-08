@@ -6,6 +6,12 @@ const style = {
   padding: 12,
 };
 
-const Button = () => <button style={style}>App 1 Button</button>;
+const onClick = (e) => {
+  e.preventDefault();
+
+  alert('Container\n- Navigate\n- Sign In/Out')
+}
+
+const Button = () => <button style={style} onClick={onClick}>App 1 Button</button>;
 
 export default Button;
